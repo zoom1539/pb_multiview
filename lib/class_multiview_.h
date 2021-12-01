@@ -24,7 +24,7 @@ public:
 	                  const std::vector<cv::Point3f> &corners_ground_,
                       cv::Mat &mat_ground_to_cam_ );
     
-    bool triangulte(const cv::Mat &mat_ground_to_cam_0_,
+    bool triangulate(const cv::Mat &mat_ground_to_cam_0_,
                     const cv::Mat &cam_mat_0_,
                     const cv::Point2d &point_0_,
                     const cv::Mat &mat_ground_to_cam_1_,

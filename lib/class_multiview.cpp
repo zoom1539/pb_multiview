@@ -1,5 +1,5 @@
-#include "class_keypoints.h"
-#include "class_keypoints_.h"
+#include "class_multiview.h"
+#include "class_multiview_.h"
 
 class MultiView::Impl
 {
@@ -30,7 +30,7 @@ bool MultiView::calib_cam(const std::vector<cv::Mat> &calib_imgs_,
                                        dist_coeffs_);
 }
 
-bool MultiView::bool calib_ground(const cv::Mat &cam_mat_, 
+bool MultiView::calib_ground(const cv::Mat &cam_mat_, 
                                   const cv::Mat &dist_coeff_,
                                   const std::vector<cv::Point2f> &corners_img_,
                                   const std::vector<cv::Point3f> &corners_ground_,
@@ -43,7 +43,7 @@ bool MultiView::bool calib_ground(const cv::Mat &cam_mat_,
                                           mat_ground_to_cam_);
 }
 
-bool MultiView::triangulte(const cv::Mat &mat_ground_to_cam_0_,
+bool MultiView::triangulate(const cv::Mat &mat_ground_to_cam_0_,
                     const cv::Mat &cam_mat_0_,
                     const cv::Point2d &point_0_,
                     const cv::Mat &mat_ground_to_cam_1_,
@@ -51,7 +51,7 @@ bool MultiView::triangulte(const cv::Mat &mat_ground_to_cam_0_,
                     const cv::Point2d &point_1_,
                     cv::Point3d &point_3d_)
 {
-    return _impl->_multiview.triangulte(mat_ground_to_cam_0_,
+    return _impl->_multiview.triangulate(mat_ground_to_cam_0_,
                                         cam_mat_0_,
                                         point_0_,
                                         mat_ground_to_cam_1_,

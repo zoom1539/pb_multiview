@@ -4,149 +4,129 @@
 #include <string>
 #include <time.h>
 #include <chrono>
-#include "class_keypoints.h"
+#include "class_multiview.h"
 
 int main()
 {
-    Keypoints keypoints;
-
-    //
-    std::string wts_path = "../lib/simple_res50_256x192.wts";
-    std::string engine_path = "../lib/simple_res50_256x192.engine";
-#if 0
-    bool is_serialized = keypoints.serialize(wts_path, engine_path);
-    if(!is_serialized)
-    {
-        std::cout << "serialize fail\n";
-        return 0;
-    }
-#else
-
-    bool is_init = keypoints.init(engine_path);
-    if(!is_init)
-    {
-        std::cout << "serialize fail\n";
-        return 0;
-    }
-
-    std::vector<cv::Mat> imgs;
-    {
-        cv::Mat img = cv::imread("../data/test1.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test2.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test3.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test4.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test1.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test2.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test3.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test4.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test1.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test2.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test3.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test4.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test1.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test2.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test3.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test4.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test1.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test2.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test3.jpg");
-        imgs.push_back(img);
-    }
-    {
-        cv::Mat img = cv::imread("../data/test4.jpg");
-        imgs.push_back(img);
-    }
-   
+    MultiView multiview;
     
-    auto start = std::chrono::system_clock::now();
-    std::vector<std::vector<cv::Point2f> > vec_coords;
-    std::vector<std::vector<float> > vec_scores;
-    bool is_run = keypoints.run(imgs, vec_coords, vec_scores);
+    // // left
+    // {
+    //     //
+    //     std::vector<cv::Mat> calib_imgs;
+    //     for (int i = 0; i < 11; i++)
+    //     {
+    //         std::stringstream ss;
+    //         ss << "../data/calib/left/" << i << ".bmp";
+    //         cv::Mat img = cv::imread(ss.str());
+    //         calib_imgs.push_back(img);
+    //     }
 
-    auto end = std::chrono::system_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " total ms" << std::endl;
+    //     cv::Size board_size(8, 6);
+    //     float    square_size = 28.57;
+    //     cv::Mat  camera_matrix;
+    //     cv::Mat  dist_coeffs;
+    //     multiview.calib_cam(calib_imgs, board_size, square_size, camera_matrix, dist_coeffs);
 
-    for (int i = 0; i < vec_coords.size(); i++)
+    //     std::string calib_result_filepath = "../data/calib/left/result.yaml";
+    //     cv::FileStorage fs(calib_result_filepath, cv::FileStorage::WRITE);
+    //     fs << "camera_matrix" << camera_matrix;
+    //     fs << "dist_coeffs" << dist_coeffs;
+
+    //     //
+    //     std::vector<cv::Point2f> corners_img;
+    //     corners_img.push_back(cv::Point2f(56, 961));
+    //     corners_img.push_back(cv::Point2f(10, 763));
+    //     corners_img.push_back(cv::Point2f(403, 742));
+    //     corners_img.push_back(cv::Point2f(711, 894));
+
+	//     std::vector<cv::Point3f> corners_ground;
+    //     corners_ground.push_back(cv::Point3f(0,0,0));
+    //     corners_ground.push_back(cv::Point3f(0,2300,0));
+    //     corners_ground.push_back(cv::Point3f(1620,2300,0));
+    //     corners_ground.push_back(cv::Point3f(1620,0,0));
+
+    //     cv::Mat  mat_ground_to_cam;
+    //     multiview.calib_ground(camera_matrix, dist_coeffs, corners_img, corners_ground, mat_ground_to_cam);
+    //     fs << "mat_ground_to_cam" << mat_ground_to_cam;
+
+    // }
+
+    // // right
+    // {
+    //     //
+    //     std::vector<cv::Mat> calib_imgs;
+    //     for (int i = 2; i < 11; i++)
+    //     {
+    //         std::stringstream ss;
+    //         ss << "../data/calib/right/" << i << ".bmp";
+    //         cv::Mat img = cv::imread(ss.str());
+    //         calib_imgs.push_back(img);
+    //     }
+
+    //     cv::Size board_size(8, 6);
+    //     float    square_size = 28.57;
+    //     cv::Mat  camera_matrix;
+    //     cv::Mat  dist_coeffs;
+    //     multiview.calib_cam(calib_imgs, board_size, square_size, camera_matrix, dist_coeffs);
+
+    //     std::string calib_result_filepath = "../data/calib/right/result.yaml";
+    //     cv::FileStorage fs(calib_result_filepath, cv::FileStorage::WRITE);
+    //     fs << "camera_matrix" << camera_matrix;
+    //     fs << "dist_coeffs" << dist_coeffs;
+
+    //     //
+    //     std::vector<cv::Point2f> corners_img;
+    //     corners_img.push_back(cv::Point2f(16, 849));
+    //     corners_img.push_back(cv::Point2f(113, 665));
+    //     corners_img.push_back(cv::Point2f(500, 662));
+    //     corners_img.push_back(cv::Point2f(708, 827));
+
+	//     std::vector<cv::Point3f> corners_ground;
+    //     corners_ground.push_back(cv::Point3f(0,0,0));
+    //     corners_ground.push_back(cv::Point3f(0,2300,0));
+    //     corners_ground.push_back(cv::Point3f(1620,2300,0));
+    //     corners_ground.push_back(cv::Point3f(1620,0,0));
+
+    //     cv::Mat  mat_ground_to_cam;
+    //     multiview.calib_ground(camera_matrix, dist_coeffs, corners_img, corners_ground, mat_ground_to_cam);
+    //     fs << "mat_ground_to_cam" << mat_ground_to_cam;
+    // }
+
+    // human center
     {
-        for (int j = 0; j < vec_coords[i].size(); j++)
-        {
-            // std::cout << vec_coords[i][j] << std::endl;
-            if (vec_scores[i][j] > 0.3)
-            {
-                cv::circle(imgs[i], cv::Point(vec_coords[i][j].x, vec_coords[i][j].y), 3, cv::Scalar(0, 0, 255), 1);
-            }
-        }
+        // left
+        cv::Mat camera_matrix_left;
+        cv::Mat dist_coeffs_left;
+        cv::Mat  mat_ground_to_cam_left;
 
-        std::stringstream ss;
-        ss << "../data/" << i << ".jpg";
-        cv::imwrite(ss.str(), imgs[i]);
+        std::string calib_result_filepath_left = "../data/calib/left/result.yaml";
+        cv::FileStorage fs_left(calib_result_filepath_left, cv::FileStorage::READ);
+
+        fs_left["camera_matrix"] >> camera_matrix_left;
+        fs_left["dist_coeffs"] >> dist_coeffs_left;
+        fs_left["mat_ground_to_cam"] >> mat_ground_to_cam_left;
+
+        // right
+        cv::Mat camera_matrix_right;
+        cv::Mat dist_coeffs_right;
+        cv::Mat  mat_ground_to_cam_right;
+
+        std::string calib_result_filepath_right = "../data/calib/right/result.yaml";
+        cv::FileStorage fs_right(calib_result_filepath_right, cv::FileStorage::READ);
+
+        fs_right["camera_matrix"] >> camera_matrix_right;
+        fs_right["dist_coeffs"] >> dist_coeffs_right;
+        fs_right["mat_ground_to_cam"] >> mat_ground_to_cam_right;
+
+        cv::Point3d point_3d;
+        multiview.triangulate(mat_ground_to_cam_left, camera_matrix_left, cv::Point2d(281, 549),
+                   mat_ground_to_cam_right, camera_matrix_right, cv::Point2d(324, 459), 
+                   point_3d);
+        
+        std::cout << point_3d << std::endl;
+
     }
-
-    for (int i = 0; i < vec_scores.size(); i++)
-    {
-        for (int j = 0; j < vec_scores[i].size(); j++)
-        {
-            std::cout << vec_scores[i][j] << std::endl;
-        }
-        std::cin.get();
-
-    }
-
-#endif
 
     std::cin.get();
     return 0;

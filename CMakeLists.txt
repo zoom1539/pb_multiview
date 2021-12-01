@@ -36,7 +36,7 @@ target_include_directories(${PROJECT_NAME}
             PUBLIC ${OpenCV_INCLUDE_DIRS}
             PUBLIC lib)
 
-target_link_libraries(${PROJECT_NAME} keypoints)
+target_link_libraries(${PROJECT_NAME} multiview)
 
 #install
 install(FILES main.cpp DESTINATION .)
